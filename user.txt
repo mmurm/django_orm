@@ -1,0 +1,28 @@
+>python manage.py shell
+>>> from apps.Users.models import *
+
+ Query: Create 3 new users
+user.objects.create(first_name="michael", last_name="murray", email_address="me@me.com", age="37")
+user.objects.create(first_name="bob", last_name="ross", email_address="me2@me2.com", age="52")
+user.objects.create(first_name="bill", last_name="murray", email_address="me3@me3.com", age="68")
+
+ Query: Retrieve all the users
+user.objects.all().values()
+
+ Query: Retrieve the last user
+user.objects.last()
+
+ Query: Retrieve the first user
+user.objects.first()
+
+ Query: Change the user with id=3 so their last name is Pancakes.
+c = user.objects.get(id=3)
+c.last_name = "Pancakes"
+c.save()
+
+ Query: Delete the user with id=2 from the database
+c = user.objects.get(id=2)
+c.delete()
+
+ Query: Get all the users, sorted by their first name
+user.objects.all().order_by("first_name")
