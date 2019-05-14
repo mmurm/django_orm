@@ -4,63 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ninja Jinja Gold</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" />
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'ninja_gold/css/style.css' %}">
+    <title>Dojos & Ninjas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container">
-        <div>
-        <p style="display:inline-block">your gold</p>
-        <input type="number" name="gold_amount" value={{ request.session.gold }} >
+    <div class="container " style="display:inline-flex">
+        <div class="dojo container mx-auto" style="width: 50%">
+            <div class="form-group row">
+                <form method="POST" action="/dojo/process_dojo">
+                    {% csrf_token %}
+                    <h2> Add a Dojo</h2>
+                    <label for="name" class="col-sm-10 col-form-label">Name</label>
+                    <div >
+                        <input type="text" class="form-control" name="name">
+                    </div>
+                    <label for="city" class="col-sm-10 col-form-label">City</label>
+                    <div >
+                        <input type="text" class="form-control" name="city">
+                    </div>
+                    <label for="state" class="col-sm-10 col-form-label">State abbreviated</label>
+                    <div >
+                        <input type="text" class="form-control" name="state">
+                    </div>
+                    <br>
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary form-control">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="ninja container" style="width: 50%">
+            <div class="form-group row">
+                <form method="POST" action="/dojo/process_ninja">
+                    <h2>add a ninja</h2>
+                    {% csrf_token %}
+                    <label for="first_name" class="col-sm-10 col-form-label">First Name</label>
+                    <div class=>
+                        <input type="text" class="form-control" name="first_name">
+                    </div>
+                    <label for="last_name" class="col-sm-10 col-form-label">Last Name</label>
+                    <div >
+                        <input type="text" class="form-control" name="last_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Dojo Name</label>
+                        <select class="form-control" name="id">
+                            {% for dojo in all_dojos %}
+                                <option value='{{dojo.id}}'>{{dojo.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary form-control">Submit</button>
+                        </div>
+                    </div>
+                </form>
+        </div>
     </div>
-        <div class = "building">
-            <h4>Metal Detecting Adventure</h4>
-            <a>(earns 10-20 golds)</a>
-            <form action="/ninja_gold/process_money" method="post">
-                {% csrf_token %}
-                <input type="hidden" name="building" value="Metal Detecting Adventure" />
-                <input type="submit" value="Find Gold!"/>
-            </form>
-        </div>
-        <div class = "building">
-            <h4>Back Alley Dice game</h4>
-            <a>(earns 5-10 golds)</a>
-            <form action="/ninja_gold/process_money" method="post">
-                {% csrf_token %}
-                <input type="hidden" name="building" value="Back Alley Dice game" />
-                <input type="submit" value="Find Gold!"/>
-            </form>
-        </div>
-         <div class = "building">
-            <h4>Couch Cusion Raid</h4>
-            <a>(earns 2-5 golds)</a>
-            <form action="/ninja_gold/process_money" method="post">
-                {% csrf_token %}
-                <input type="hidden" name="building" value="Couch Cusion Raid" />
-                <input type="submit" value="Find Gold!"/>
-            </form>
-        </div>
-        <div class = "building">
-            <h4>Casino Card Game</h4>
-            <a>(earns/takes 0-50 golds)</a>
-            <form action="/ninja_gold/process_money" method="post">
-                {% csrf_token %}
-                <input type="hidden" name="building" value="Casino Card Game" />
-                <input type="submit" value="Find Gold!"/>
-            </form>
-        </div>
-        <p style="text-align:center;margin-top:10px;">Activites:</p>
-        <div class= "activities">
-            {% for activity in request.session.activities %}
-                <p style="color:{{activity.color}};">{{activity.text}}</p>
-            {% endfor %}
+</div>
+<hr>
+<div class="mx-auto" style="width: 25%;">
+    <h2>All the dojos</h2>
+    {% for dojo in all_dojos %}
+        <p>Ninjas at the {{dojo.name}} dojo</p>
+        {% for ninja in dojo.ninja.all %}
+        <ul class="list-group">
+                <li class="list-group-item">{{ninja.first_name}} {{ninja.last_name}}</li>
+        {% endfor %}
+    {% endfor %}
 
-        </div>
-        <form action='/ninja_gold/reset'>
-            <input type='submit' value = "reset gold">
-        </form>
-    </div>
+    
+
+
 </body>
 </html>
