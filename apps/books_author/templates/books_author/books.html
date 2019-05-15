@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dojos & Ninjas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+        <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <h2 class="text-center">Add a book</h2>
+                    <form action="/b_a/process_books" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="title">Email address</label>
+                            <input type="text" class="form-control" id="title">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea class="form-control" id="description" rows="5"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary mx-auto">Add</button>
+                    </form>
+                  </div>
+                  <div class="col">
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for books in all_books}
+                                <tr>
+                                <th scope="row">{{books.id}}</th>
+                                <td>{{books.title}}</td>
+                                <td><a href="/b_a/books/{{books.id}}">View</a></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                  </div>
+                </div>
+
+</body>
+</html>
