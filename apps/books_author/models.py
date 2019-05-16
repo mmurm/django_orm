@@ -1,15 +1,16 @@
 from django.db import models
 
-class books(models.Model):
+class Book(models.Model):
     title = models.CharField(max_length=255)
-    desc = models.TextField()
+    book_desc = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-class authors(models.Model):
+
+class Author(models.Model):
     first_name = models.CharField(max_length=45)
     last_name = models.CharField(max_length=45)
-    notes = models.TextField()
-    books = models.ManyToManyField(books, related_name="authors")
+    note = models.TextField()
+    books = models.ManyToManyField(Book, related_name="authors")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

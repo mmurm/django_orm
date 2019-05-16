@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Books and Authors</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+    <h2>Title: {{book.title}} </h2>
+    <p>ID: {{book.id}}</p>
+    <p>Description: {{book.book_desc}}</p>
+    <p>Authors:
+        <ul class="list-group">
+            {% for author in book.authors.all %}
+            <ul class="list-group">
+                    <li class="list-group-item">{{author.first_name}} {{author.last_name}}</li>
+            {% endfor %}
+        </ul>
+        <form action="/b_a/update_book/{{book.id}}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <select class="form-control " name="id">
+                {% for author in all_authors %}
+                    <option value='{{author.id}}'>{{author.first_name}} {{author.last_name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary form-control">add</button>
+            </div>
+        </div>
+    </p>
+
+</body>
+</html>

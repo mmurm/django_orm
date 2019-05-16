@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Books and Authors</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+        <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <h2 class="text-center">Add an Author</h2>
+                    <form action="/b_a/process_author" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="first_name">First Name:</label>
+                            <input type="text" class="form-control" name="first_name">
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name">Last Name:</label>
+                            <input type="text" class="form-control" name="last_name">
+                        </div>
+                        <div class="form-group">
+                            <label for="note">Notes:</label>
+                            <textarea class="form-control" name="note" rows="5"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary mx-auto">Add Author</button>
+                    </form>
+                  </div>
+                  <div class="col">
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for author in all_authors %}
+                                <tr>
+                                <th scope="row">{{author.id}}</th>
+                                <td>{{author.first_name}} {{author.last_name}}</td>
+                                <td><a href="/b_a/authors/{{author.id}}">View</a></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                  </div>
+                </div>
+
+</body>
+</html>
