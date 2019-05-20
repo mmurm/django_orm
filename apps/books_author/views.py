@@ -32,7 +32,7 @@ def process_book(request):
     return redirect("/b_a")
 
 def process_author(request):
-    Author.objects.create(first_name=request.POST['first_name'], last_name=request.POST['last_name'], note=request.POST['last_name'])
+    Author.objects.create(first_name=request.POST['first_name'], last_name=request.POST['last_name'], note=request.POST['note'])
     return redirect("/b_a/authors")
 
 def update_book(request, b_id):

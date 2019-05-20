@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'apps.books_author',
     'apps.shows',
     'apps.l_r',
+    'apps.wall',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
