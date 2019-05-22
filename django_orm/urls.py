@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^shows/', include('apps.shows.urls')),
     url(r'^l_r/', include('apps.l_r.urls')),
     url(r'^wall/', include('apps.wall.urls')),
+    url(r'^fav_b/', include('apps.fav_book.urls')),
 ]

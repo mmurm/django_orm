@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'apps.shows',
     'apps.l_r',
     'apps.wall',
+    'apps.fav_book',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col=6 px-3">
+                <h1 class="display-4">Login</h1>
+                {% if messages %}
+                <ul class="messages">                       
+                    {% for message in messages %}            
+                        <li>{{message}}</li>                   
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <form action="/fav_b/login" method="POST">
+                    {%csrf_token%}
+                        <label for="l_email"> EMail address</label>
+                        <input type="email" class="form-control" name="l_email">
+                        <label for="l_password"> Password</label>
+                        <input type="password" class="form-control" name="l_password">
+                        <button type="submit" class="btn btn-primary">login</button>
+                    </form>
+            </div>
+            <div class="col=6 px-3">
+                <h1 class="display-4">Register</h1>
+                    {% if messages %}
+                    <ul class="messages">                       
+                        {% for message in messages %}            
+                            <li>{{message}}</li>                   
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                <form action="/fav_b/register" method="POST">
+                    {%csrf_token%}
+                    <label for="first_name"> First name</label>
+                    <input type="text" class="form-control" name="first_name">
+                    <label for="last_name"> Last name</label>
+                    <input type="text" class="form-control" name="last_name">
+                    <label for="r_email"> EMail address</label>
+                    <input type="text" class="form-control" name="r_email">
+                    <label for="r_password"> Password</label>
+                    <input type="password" class="form-control" name="r_password">
+                    <label for="c_password"> Confirm Password</label>
+                    <input type="password" class="form-control" name="c_password">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
